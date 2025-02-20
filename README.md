@@ -4,9 +4,23 @@
 
 To validate the abc.in performance under the load of 50000 transactions per hour and to identify the breaking point of the server.
 
-### Load Test Result
+# Load Test Description
 
 Load test has been conducted with 50 users concurrently accessing the website to achieve the 50000 transactions per hour. This test is to validate whether the server can handle 50000 transactions per hour or not.
+
+# Conclusion
+
+Multiple rounds have been conducted to validate the server performance and to identify the breaking point. During the load test, the system is capable of handling 50000 transactions per hour.
+
+No errors have been observed during the execution which resembles that the server will respond positively for the load of 50000 transactions per hour with the 99 percentile response time is 1.5 seconds.
+
+During the stress test, the server responded positively till 125 concurrent users, and when the load increases, the first internal server 500 error code occurred and eventually all the transactions started failing. This behavior has been observed in the subsequent execution as well.
+
+Load test reveals that the server can handle 50000 transactions per hour with minimal users accessed the website.
+
+Stress test reveals that the server can handle 125 concurrent users accessing the website. Subsequent increase in the load will fail to fulfill the user&#39;s expectation.
+
+## Scenario #1
 
 | Total Duration | 1 hour |
 | --- | --- |
@@ -20,14 +34,15 @@ Load test has been conducted with 50 users concurrently accessing the website to
 | 05\_UserProfile | 9863 | 403 | 291 | 926 | 964 | 1302 | 284 | 23931 | 0.00% | 2.6 | 10.6 |
 | TOTAL | 49326 | 458 | 292 | 935 | 993 | 1543 | 283 | 23931 | 0.00% | 13 | 69.6 |
 
+### Errors
+No errors encountered
+
 ### Observations:
+1. Maximum response time is 23931 milliseconds
+2. Minimum response time is 283 milliseconds
+3. 99 percentile is less 1543 milliseconds
 
-1. No errors encountered during load testing
-2. Maximum response time is 23931 milliseconds
-3. Minimum response time is 283 milliseconds
-4. 99 percentile is less 1543 milliseconds
-
-## Stress Testing
+## Scenario #2
 
 In this test, more than 100 users have been injected concurrently at a regular interval of 30 seconds for the below transactions. When the concurrent users reached 125, the first error (Internal Server Error Code 500) occurred. Eventually all the transactions started failing. Below is the response time dashboard for the run 1. Similar observations for the run 2 as well.
 
@@ -53,24 +68,21 @@ In this test, more than 100 users have been injected concurrently at a regular i
 | 05\_UserProfile | 5675 | 1814 | 1001 | 2209 | 3642 | 18025 | 1 | 379085 | 0.62% | 9.1 | 36.8 |
 | TOTAL | 28721 | 1952 | 1033 | 2757 | 4324 | 18025 | 1 | 502888 | 0.61% | 45.6 | 244.2 |
 
+### Errors
+No errors observed till 125 concurrent users performing the transactions.
+
 ### Observations:
 
-1. No errors observed till 125 concurrent users performing the transactions.
-2. First internal server error occurred after the 125 concurrent users trying to access the website.
-3. System will eventually fail to respond after 125 concurrent users.
+1. First internal server error occurred after the 125 concurrent users trying to access the website.
+2. System will eventually fail to respond after 125 concurrent users.
 
-## Conclusion
 
-Multiple rounds have been conducted to validate the server performance and to identify the breaking point. During the load test, the system is capable of handling 50000 transactions per hour.
-
-No errors have been observed during the execution which resembles that the server will respond positively for the load of 50000 transactions per hour with the 99 percentile response time is 1.5 seconds.
-
-During the stress test, the server responded positively till 125 concurrent users, and when the load increases, the first internal server 500 error code occurred and eventually all the transactions started failing. This behavior has been observed in the subsequent execution as well.
-
-Load test reveals that the server can handle 50000 transactions per hour with minimal users accessed the website.
-
-Stress test reveals that the server can handle 125 concurrent users accessing the website. Subsequent increase in the load will fail to fulfill the user&#39;s expectation.
-
-## Next Steps
+## Recommendations
 
 It is advisable to monitor the performance of CPU, Memory, Network and Disk utilization. To handle more number of users, tuning or scaling the infrastructure is required.
+
+Recommended improvements:
+| **Task** | **Descriptions** | **Priority** |
+| --- | --- | --- |
+| RND-001 |Improve memory utilization in module YY | High |
+| RND-002 |Improve CPU utilization in process XX | Medium |
